@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    protected $guard = "admin";
 
     /**
      * The attributes that are mass assignable.
@@ -45,24 +47,5 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function ($user) {
-            $user->cart()->create();
-        });
-    }
-
-    public function order()
-    {
-        return $this->hasMany(Orders::class);
-    }
-
-    public function cart()
-    {
-        return $this->hasOne(Cart::class);
     }
 }
