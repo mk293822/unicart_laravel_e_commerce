@@ -1,4 +1,5 @@
 <x-admin-layout>
+    @vite(['resources/js/demo/chart-bar-demo.js', 'resources/js/demo/chart-pie-demo.js', 'resources/js/demo/chart-area-demo.js', 'resources/js/demo/datatables-demo.js'])
  <div class="container-fluid">
 
                     <!-- Page Heading -->

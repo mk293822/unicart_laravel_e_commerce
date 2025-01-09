@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisteredAdminController extends Controller
 {
     /**
      * Display the registration view.
@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::guard('admin')->login($admin);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('admin.dashboard', absolute: false));
     }
 }

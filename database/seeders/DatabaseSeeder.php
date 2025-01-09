@@ -263,12 +263,6 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        User::factory()->create([
-            'name' => 'Min Khant Thaw',
-            'email' => 'mkt293822@gmail.com',
-            'password' => bcrypt('mkt293822'),
-        ]);
-
         $faker = Faker::create();
 
 
@@ -279,13 +273,6 @@ class DatabaseSeeder extends Seeder
                 "slug" => Str::slug($category),
                 "description" => $description,
             ]);
-            foreach ($product_names as $product_name) {
-                Products::factory(1)->create([
-                    'category_id' => $category->id,
-                    'name' => $product_name,
-                    'slug' => Str::slug($product_name),
-                ]);
-            }
         }
     }
 }

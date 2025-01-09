@@ -1,4 +1,5 @@
 @php
+    $full_stars = 0;
     $rating = $product->rating;
     $full_stars = floor($rating);
     $decimal_star = ($rating - $full_stars) * 100; 
@@ -10,7 +11,7 @@
             <!-- Product Image Section -->
             <div class="mb-8 md:mt-4 md:mb-0">
                 <!-- Single product image -->
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-auto rounded-lg shadow-lg">
             </div>
 
             <!-- Product Details Section -->
@@ -38,6 +39,21 @@
                                 <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
                                 <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 {{$decimal_star}}% 0 0)"/>
                             </svg>
+                        @endif
+                        @if ($full_stars == 0)
+                            @for ($i = 0; $i < 5; $i++)
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 100% 0 0)"/>
+                                </svg>
+                            @endfor
+                        @else
+                            @for ($i = 0; $i < 4 - $full_stars; $i++)
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 100% 0 0)"/>
+                                </svg>
+                            @endfor
                         @endif
                     </div>
                 </div>

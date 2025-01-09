@@ -34,7 +34,7 @@
                         
                         <!-- Product Image with Hover Effect -->
                         <div class="relative group">
-                            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full text-center h-48 object-cover group-hover:opacity-80 transition-opacity duration-300">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"  class="w-full text-center h-48 object-cover group-hover:opacity-80 transition-opacity duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50 group-hover:opacity-60 transition-opacity duration-300"></div>
                             <div class="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <a href="{{route("dashboard.show", $product)}}" class="bg-white text-black px-4 py-2 rounded-full shadow-lg font-semibold text-md">Quick View</a>
@@ -52,18 +52,31 @@
                             <!-- Product Rating -->
                             <div class="flex space-x-1 text-yellow-400">
                                 @for ($i = 0; $i < $full_stars; $i++)
-                                    <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                        <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z"/>
-                                    </svg>
-                                @endfor
-                                @if ($decimal_star > 0)
-                                    <svg class="w-4 h-4 fill-current text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-
-                                        <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
-
-                                        <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 {{$decimal_star}}% 0 0)"/>
-                                    </svg>
-                                @endif
+                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z"/>
+                            </svg>
+                        @endfor
+                        @if ($decimal_star > 0)
+                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
+                                <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 {{$decimal_star}}% 0 0)"/>
+                            </svg>
+                        @endif
+                        @if ($full_stars == 0)
+                            @for ($i = 0; $i < 5; $i++)
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 100% 0 0)"/>
+                                </svg>
+                            @endfor
+                        @else
+                            @for ($i = 0; $i < 4 - $full_stars; $i++)
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="none" stroke="currentColor"/>
+                                    <path d="M12 17.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73-1.64 7.03L12 17.27z" fill="currentColor" stroke="none" clip-path="inset(0 100% 0 0)"/>
+                                </svg>
+                            @endfor
+                        @endif
                             </div>
 
                             <!-- Price -->
