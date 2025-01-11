@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedAdminSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\UtilitiesController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,12 +40,18 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         return view('admin.chart.index');
     })->name('admin.chart.index');
 
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/users/show/{user}', [UserController::class, 'show'])->name('admin.users.show');
+    Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/users/update/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::post('/users/destroy/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
     Route::get('/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
     Route::get('/products/show/{product}', [ProductController::class, 'show'])->name('admin.products.show');
     Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('admin.products.edit');
-    Route::post('/products/update/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+    Route::put('/products/update/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::post('/products/destroy/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::get('/404', function () {
