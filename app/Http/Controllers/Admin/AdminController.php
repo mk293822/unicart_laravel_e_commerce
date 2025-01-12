@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin;
+use App\Models\Orders;
+use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +16,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $products = Products::all();
+        $users = User::all();
+        $orders = Orders::whereNot("status", "completed")->get();
+        return view('admin.dashboard', [
+            'products' => $products,
+            'users' => $users,
+            "orders" => $orders
+        ]);
     }
 
     /**

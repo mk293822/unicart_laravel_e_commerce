@@ -116,6 +116,9 @@ class ProductController extends Controller
      */
     public function show(Products $product)
     {
+        if (!$product) {
+            return redirect()->route("admin.errors.404")->with("error", "true");
+        }
         return view("admin.products.show", [
             'product' => $product,
         ]);

@@ -70,6 +70,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-4">
+                            <!-- Custom Pagination -->
+                            <div class="d-flex justify-content-center">
+                                {{$products->links('pagination::bootstrap-5')}}
+                            </div>
+                        </div> 
                     </div>
                 @else
                     <!-- Show No Products Message -->

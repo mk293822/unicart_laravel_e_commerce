@@ -71,6 +71,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if (!$user) {
+            return redirect()->route("admin.errors.404");
+        }
         // dd($user);
         return view("admin.users.show", [
             'user' => $user

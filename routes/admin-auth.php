@@ -29,16 +29,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::redirect("/admin", "/admin/dashboard");
 
-
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-    Route::get('/table', function () {
-        return view('admin.datatable.index');
-    })->name('admin.datatable.index');
-
-    Route::get('/chart', function () {
-        return view('admin.chart.index');
-    })->name('admin.chart.index');
 
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/users/show/{user}', [UserController::class, 'show'])->name('admin.users.show');
@@ -55,13 +46,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('/products/destroy/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::get('/404', function () {
-        return view('admin.pages.404');
-    })->name('admin.pages.404');
-
-    Route::get('/utilities/animation', [UtilitiesController::class, 'animation'])->name('admin.utilities.animation');
-    Route::get('/utilities/border', [UtilitiesController::class, 'border'])->name('admin.utilities.border');
-    Route::get('/utilities/color', [UtilitiesController::class, 'color'])->name('admin.utilities.color');
-    Route::get('/utilities/other', [UtilitiesController::class, 'other'])->name('admin.utilities.other');
+        return view('admin.errors.404');
+    })->name('admin.errors.404');
 
     Route::post('/logout', [AuthenticatedAdminSessionController::class, 'destroy'])->name('admin.logout');
 });
